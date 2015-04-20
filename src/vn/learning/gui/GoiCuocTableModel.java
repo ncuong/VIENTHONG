@@ -5,7 +5,10 @@
  */
 package vn.learning.gui;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import vn.learning.dao.GoiCuocDAO;
 import vn.learning.dao.GoiCuocDAOImpl;
@@ -18,9 +21,29 @@ import vn.learning.model.GoiCuoc;
 public class GoiCuocTableModel extends AbstractTableModel {
 
     private String[] columnNames = {"ID", "Tên gói cước", "Cước gọi nội mạng", "Cước gọi ngoại mạng", "Cước nhắn tin nội mạng", "Cước nhắn tin ngoại mạng"};
-    private GoiCuocDAO goiCuocDAO = new GoiCuocDAOImpl();
-    private ArrayList<GoiCuoc> goiCuocs = goiCuocDAO.getAllGoiCuoc();
+    private GoiCuocDAO goiCuocDAO;
+    private ArrayList<GoiCuoc> goiCuocs;
 
+    public ArrayList<GoiCuoc> getGoiCuocs() {
+        return goiCuocs;
+    }
+
+    public void setGoiCuocs(ArrayList<GoiCuoc> goiCuocs) {
+        this.goiCuocs = goiCuocs;
+    }
+    
+    
+
+    public GoiCuocTableModel() throws SQLException{
+        
+        try {
+            goiCuocDAO = new GoiCuocDAOImpl();
+            setGoiCuocs(goiCuocDAO.getAllGoiCuoc());
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
+    
     @Override
     public int getRowCount() {
         return goiCuocs.size();

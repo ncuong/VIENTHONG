@@ -26,23 +26,25 @@ public class DataBaseUtil {
     private static final String USER_NAME = "sa";
     private static final String PASSWORD = "123456";
 
-    public void createConnection() throws ClassNotFoundException, SQLException {
+    public void createConnection() throws SQLException {
         try {
             Class.forName(DRIVER_CLASS);
             connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            throw e;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
+        } catch (SQLException ex) {
+            throw ex;
         }
     }
 
     public void closeConnection() {
         try {
-            pstt.close();
-            connection.close();
+            if (null != pstt) {
+                pstt.close();
+            }
+            if (null != connection){
+                connection.close();
+            }   
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,8 +58,6 @@ public class DataBaseUtil {
             }
             rs = pstt.executeQuery();
         } catch (SQLException e) {
-
-            e.printStackTrace();
             throw e;
         }
         return rs;
@@ -68,7 +68,6 @@ public class DataBaseUtil {
             pstt = connection.prepareStatement(sql);
             rs = pstt.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
             throw e;
         }
         return rs;

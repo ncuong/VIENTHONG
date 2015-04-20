@@ -6,12 +6,16 @@
 package vn.learning.gui;
 
 import java.awt.BorderLayout;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Admin
  */
 public class MainFrame extends javax.swing.JFrame {
+
+    KhachHangGUI khachHangGUI;
 
     /**
      * Creates new form MainFrame
@@ -112,21 +116,28 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
-        GoiCuocGUI goiCuocGUI = new GoiCuocGUI();
-        mainPanel.add(goiCuocGUI, BorderLayout.CENTER);
-        mainPanel.repaint();
-        mainPanel.revalidate();
+        try {
+            GoiCuocGUI goiCuocGUI = new GoiCuocGUI();
+            mainPanel.add(goiCuocGUI, BorderLayout.CENTER);
+            mainPanel.repaint();
+            mainPanel.revalidate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối đc database, vui lòng liên hệ nhà phát triển để biết thêm thông tin chi tiết!");
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
-
-        TheNopTienGUI theNop = new TheNopTienGUI();
-        mainPanel.add(theNop, BorderLayout.CENTER);
-        mainPanel.repaint();
-        mainPanel.revalidate();
+//        try {
+            TheNopTienGUI theNop = new TheNopTienGUI();
+            mainPanel.add(theNop, BorderLayout.CENTER);
+            mainPanel.repaint();
+            mainPanel.revalidate();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Không kết nối đc database, vui lòng liên hệ nhà phát triển để biết thêm thông tin chi tiết!");
+//        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -137,19 +148,22 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
-        
-        KhachHangGUI khachHangGUI = new KhachHangGUI();
-        mainPanel.add(khachHangGUI, BorderLayout.CENTER);
-        mainPanel.repaint();
-        mainPanel.revalidate();
+        try {
+            khachHangGUI = new KhachHangGUI();
+            mainPanel.add(khachHangGUI, BorderLayout.CENTER);
+            mainPanel.repaint();
+            mainPanel.revalidate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối được đến database, vui lòng liên lạc người phát triển để được giải quyết!");
+        }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        
+
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
-        
+
         SIMGUI simgui = new SIMGUI();
         mainPanel.add(simgui, BorderLayout.CENTER);
         mainPanel.repaint();
@@ -160,12 +174,12 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
-        
+
         CuocGoiGUI cuocGoiGUI = new CuocGoiGUI();
         mainPanel.add(cuocGoiGUI, BorderLayout.CENTER);
         mainPanel.repaint();
         mainPanel.revalidate();
-        
+
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vn.learning.dao;
 
 import java.sql.ResultSet;
@@ -18,15 +17,15 @@ import vn.learning.util.DataBaseUtil;
  *
  * @author Admin
  */
-public class GoiCuocDAOImpl implements GoiCuocDAO{
+public class GoiCuocDAOImpl implements GoiCuocDAO {
 
-    DataBaseUtil dataBaseUtil = new DataBaseUtil();
-    
+    DataBaseUtil dataBaseUtil;
+
     @Override
-    public ArrayList<GoiCuoc> getAllGoiCuoc() {
+    public ArrayList<GoiCuoc> getAllGoiCuoc() throws SQLException {
         ArrayList<GoiCuoc> goiCuocs = new ArrayList<GoiCuoc>();
         try {
-            
+            dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
             String sql = new StringBuilder().append("SELECT * FROM GOI_CUOC").toString();
             ResultSet resultSet = dataBaseUtil.executePreparedStatement(sql);
@@ -38,26 +37,22 @@ public class GoiCuocDAOImpl implements GoiCuocDAO{
                 Integer cuocGoiNgoaiMang = resultSet.getInt("CUOC_GOI_NGOAI_MANG");
                 Integer cuocNhanTinNoiMang = resultSet.getInt("CUOC_NHAN_TIN_NOI_MANG");
                 Integer cuocNhanTinNgoaiMang = resultSet.getInt("CUOC_NHAN_TIN_NGOAI_MANG");
-                
+
                 goiCuoc.setId(id);
                 goiCuoc.setTenGoiCuoc(tenGoiCuoc);
                 goiCuoc.setCuocGoiNoiMang(cuocGoiNoiMang);
                 goiCuoc.setCuocGoiNgoaiMang(cuocGoiNgoaiMang);
                 goiCuoc.setCuocNhanTinNoiMang(cuocNhanTinNoiMang);
                 goiCuoc.setCuocNhanTinNgoaiMang(cuocNhanTinNgoaiMang);
-                
+
                 goiCuocs.add(goiCuoc);
             }
-            
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GoiCuocDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(GoiCuocDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         } finally {
             dataBaseUtil.closeConnection();
         }
-        
+
         return goiCuocs;
     }
 
@@ -69,8 +64,6 @@ public class GoiCuocDAOImpl implements GoiCuocDAO{
                     .toString();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{goiCuoc.getTenGoiCuoc(), goiCuoc.getCuocGoiNoiMang(), goiCuoc.getCuocGoiNgoaiMang(), goiCuoc.getCuocNhanTinNoiMang(), goiCuoc.getCuocNhanTinNgoaiMang()});
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GoiCuocDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(GoiCuocDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -86,8 +79,6 @@ public class GoiCuocDAOImpl implements GoiCuocDAO{
         try {
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{id});
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GoiCuocDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(GoiCuocDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -105,13 +96,11 @@ public class GoiCuocDAOImpl implements GoiCuocDAO{
         try {
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{goiCuoc.getTenGoiCuoc(), goiCuoc.getCuocGoiNoiMang(), goiCuoc.getCuocGoiNgoaiMang(), goiCuoc.getCuocNhanTinNoiMang(), goiCuoc.getCuocNhanTinNgoaiMang(), goiCuoc.getId()});
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GoiCuocDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(GoiCuocDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             dataBaseUtil.closeConnection();
         }
     }
-    
+
 }

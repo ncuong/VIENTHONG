@@ -46,8 +46,6 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
                 
                 theNopTiens.add(theNopTien);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -65,8 +63,6 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
                     .toString();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{theNopTien.getSoSeri(), theNopTien.getMenhGia(), theNopTien.getThoiGianNop(), theNopTien.isTrangThai()});
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -82,8 +78,6 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
         try {
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{id});
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -101,9 +95,6 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
                     .toString();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{theNop.getSoSeri(), theNop.getMenhGia(), theNop.getThoiGianNop(), theNop.isTrangThai(), theNop.getId()});
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

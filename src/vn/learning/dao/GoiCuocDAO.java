@@ -6,6 +6,7 @@
 
 package vn.learning.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import vn.learning.model.GoiCuoc;
 
@@ -14,7 +15,7 @@ import vn.learning.model.GoiCuoc;
  * @author Admin
  */
 public interface GoiCuocDAO {
-    public ArrayList<GoiCuoc> getAllGoiCuoc();
+    public ArrayList<GoiCuoc> getAllGoiCuoc() throws SQLException;
     public void addGoiCuoc(GoiCuoc goiCuoc);
     public void deleteGoiCuoc(Integer id);
     public void updateGoiCuoc(GoiCuoc goiCuoc);
