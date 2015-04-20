@@ -19,12 +19,15 @@ import vn.learning.util.DataBaseUtil;
  */
 public class KhachHangDAOImpl implements KhachHangDAO {
 
-    DataBaseUtil dataBaseUtil = new DataBaseUtil();
+//    DataBaseUtil dataBaseUtil = new DataBaseUtil();
+    DataBaseUtil dataBaseUtil;
 
     @Override
-    public ArrayList<KhachHang> getAllKhachHang() {
+    public ArrayList<KhachHang> getAllKhachHang() throws SQLException {
         ArrayList<KhachHang> khachHangs = new ArrayList<>();
         try {
+            dataBaseUtil = new DataBaseUtil();
+            
             dataBaseUtil.createConnection();
             String sql = new StringBuilder().append("SELECT * FROM KHACH_HANG").toString();
             ResultSet resultSet = dataBaseUtil.executePreparedStatement(sql);
@@ -41,28 +44,26 @@ public class KhachHangDAOImpl implements KhachHangDAO {
                 khachHang.setQueQuan(queQuan);
 
                 khachHangs.add(khachHang);
+                
             }
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return khachHangs;
         } catch (SQLException ex) {
-            Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         } finally {
             dataBaseUtil.closeConnection();
         }
-        return khachHangs;
+        
     }
 
     @Override
     public void addKhachHang(KhachHang khachHang) {
         try {
+            dataBaseUtil = new DataBaseUtil();
             String sql = new StringBuilder()
                     .append("INSERT INTO KHACH_HANG VALUES(?,?,?)")
                     .toString();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{khachHang.getSoCMND(), khachHang.getHoTen(), khachHang.getQueQuan()});
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -76,16 +77,15 @@ public class KhachHangDAOImpl implements KhachHangDAO {
                 .append("DELETE FROM KHACH_HANG WHERE KHACH_HANG.ID = ?")
                 .toString();
         try {
+            dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{id});
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             dataBaseUtil.closeConnection();
         }
-        
+
     }
 
     @Override
@@ -96,18 +96,14 @@ public class KhachHangDAOImpl implements KhachHangDAO {
                 .append("where ID = ?")
                 .toString();
         try {
+            dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{khachHang.getSoCMND(), khachHang.getHoTen(), khachHang.getQueQuan(), khachHang.getId()});
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             dataBaseUtil.closeConnection();
         }
     }
-    
-    
-    
 
 }

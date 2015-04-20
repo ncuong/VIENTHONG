@@ -5,6 +5,7 @@
  */
 package vn.learning.gui;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import vn.learning.dao.KhachHangDAO;
@@ -18,8 +19,26 @@ import vn.learning.model.KhachHang;
 public class KhachHangTableModel extends AbstractTableModel {
 
     private String[] columnNames = {"ID", "Số CMND", "Họ Tên", "Quê Quán"};
-    private KhachHangDAO khachHangDAO = new KhachHangDAOImpl();
-    private ArrayList<KhachHang> khachHangs = khachHangDAO.getAllKhachHang();
+
+    private KhachHangDAO khachHangDAO;
+    private ArrayList<KhachHang> khachHangs;
+
+    public ArrayList<KhachHang> getKhachHangs() {
+        return khachHangs;
+    }
+
+    public void setKhachHangs(ArrayList<KhachHang> khachHangs) {
+        this.khachHangs = khachHangs;
+    }
+
+    public KhachHangTableModel() throws SQLException {
+        try {
+            khachHangDAO = new KhachHangDAOImpl();
+            setKhachHangs(khachHangDAO.getAllKhachHang());
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
 
     @Override
     public int getRowCount() {

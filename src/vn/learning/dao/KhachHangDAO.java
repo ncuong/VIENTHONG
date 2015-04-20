@@ -15,7 +15,7 @@ import vn.learning.model.KhachHang;
  * @author Admin
  */
 public interface KhachHangDAO {
-    public ArrayList<KhachHang> getAllKhachHang();
+    public ArrayList<KhachHang> getAllKhachHang() throws SQLException;
     public void addKhachHang(KhachHang khachHang);
     public void delteKhachHang(Integer id);
     public void updateKhachHang(KhachHang khachHang);

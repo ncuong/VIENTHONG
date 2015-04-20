@@ -5,9 +5,8 @@
  */
 package vn.learning.gui;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import vn.learning.dao.KhachHangDAO;
 import vn.learning.dao.KhachHangDAOImpl;
 import vn.learning.model.KhachHang;
@@ -32,18 +31,25 @@ public class KhachHangGUI extends javax.swing.JPanel {
     /**
      * Creates new form KhachHang
      */
-    public KhachHangGUI() {
-
+    public KhachHangGUI() throws SQLException {
         initComponents();
-        fillDataToTable();
-        emptyControl();
+        try {
+            fillDataToTable();
+        } catch (SQLException ex) {
+            throw ex;
+        }
     }
 
     //push data vao table
-    public void fillDataToTable() {
-        tblKhachHang.setModel(new KhachHangTableModel());
-        tblKhachHang.repaint();
-        tblKhachHang.revalidate();
+    public void fillDataToTable() throws SQLException {
+        try {
+            tblKhachHang.setModel(new KhachHangTableModel());
+            tblKhachHang.repaint();
+            tblKhachHang.revalidate();
+        } catch (SQLException ex) {
+            throw ex;
+        }
+
     }
 
     private void emptyControl() {
@@ -218,23 +224,27 @@ public class KhachHangGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            String soCMND = txfSoCMND.getText();
+            String hoTen = txfHoTen.getText();
+            String queQuan = txfQueQuan.getText();
 
-        String soCMND = txfSoCMND.getText();
-        String hoTen = txfHoTen.getText();
-        String queQuan = txfQueQuan.getText();
+            KhachHang khachHang = new KhachHang();
+            khachHang.setSoCMND(soCMND);
+            khachHang.setHoTen(hoTen);
+            khachHang.setQueQuan(queQuan);
 
-        KhachHang khachHang = new KhachHang();
-        khachHang.setSoCMND(soCMND);
-        khachHang.setHoTen(hoTen);
-        khachHang.setQueQuan(queQuan);
+            khachHangDAO = new KhachHangDAOImpl();
+            khachHangDAO.addKhachHang(khachHang);
 
-        khachHangDAO = new KhachHangDAOImpl();
-        khachHangDAO.addKhachHang(khachHang);
+            JOptionPane.showMessageDialog(null, "Đã thêm vào thành công!");
 
-        JOptionPane.showMessageDialog(null, "Đã thêm vào thành công!");
+            fillDataToTable();
+            emptyControl();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, liên hệ người phát triển để được giải quyết!");
+        }
 
-        fillDataToTable();
-        emptyControl();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -250,14 +260,20 @@ public class KhachHangGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (id == null || id < 0) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện delete!");
-        } else {
-            khachHangDAO = new KhachHangDAOImpl();
-            khachHangDAO.delteKhachHang(id);
-            JOptionPane.showMessageDialog(null, "Delete thành công!");
-            fillDataToTable();
-            emptyControl();
+
+        try {
+            if (id == null || id < 0) {
+
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện delete!");
+            } else {
+                khachHangDAO = new KhachHangDAOImpl();
+                khachHangDAO.delteKhachHang(id);
+                JOptionPane.showMessageDialog(null, "Delete thành công!");
+                fillDataToTable();
+                emptyControl();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, liên hệ người phát triển để được giải quyết!");
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -267,20 +283,24 @@ public class KhachHangGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_txfHoTenActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (id == null || id < 0) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện thay đổi");
-        } else {
-            khachHangDAO = new KhachHangDAOImpl();
-            KhachHang khachHang = new KhachHang();
-            khachHang.setId(id);
-            khachHang.setSoCMND(txfSoCMND.getText());
-            khachHang.setHoTen(txfHoTen.getText());
-            khachHang.setQueQuan(txfQueQuan.getText());
-            
-            khachHangDAO.updateKhachHang(khachHang);
-            JOptionPane.showMessageDialog(null, "Đã update thành công!");
-            fillDataToTable();
-            emptyControl();
+        try {
+            if (id == null || id < 0) {
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện thay đổi");
+            } else {
+                khachHangDAO = new KhachHangDAOImpl();
+                KhachHang khachHang = new KhachHang();
+                khachHang.setId(id);
+                khachHang.setSoCMND(txfSoCMND.getText());
+                khachHang.setHoTen(txfHoTen.getText());
+                khachHang.setQueQuan(txfQueQuan.getText());
+
+                khachHangDAO.updateKhachHang(khachHang);
+                JOptionPane.showMessageDialog(null, "Đã update thành công!");
+                fillDataToTable();
+                emptyControl();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, liên hệ người phát triển để được giải quyết!");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
