@@ -33,6 +33,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -57,7 +58,20 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
+        jMenuItem6.setText("SIM");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
+
         jMenuItem5.setText("Cuộc gọi");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuItem1.setText("Gói cước");
@@ -98,8 +112,8 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
-        GoiCuoc goiCuoc = new GoiCuoc();
-        mainPanel.add(goiCuoc, BorderLayout.CENTER);
+        GoiCuocGUI goiCuocGUI = new GoiCuocGUI();
+        mainPanel.add(goiCuocGUI, BorderLayout.CENTER);
         mainPanel.repaint();
         mainPanel.revalidate();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -109,7 +123,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.repaint();
         mainPanel.revalidate();
 
-        TheNop theNop = new TheNop();
+        TheNopTienGUI theNop = new TheNopTienGUI();
         mainPanel.add(theNop, BorderLayout.CENTER);
         mainPanel.repaint();
         mainPanel.revalidate();
@@ -124,11 +138,35 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.repaint();
         mainPanel.revalidate();
         
-        KhachHang khachHang = new KhachHang();
-        mainPanel.add(khachHang, BorderLayout.CENTER);
+        KhachHangGUI khachHangGUI = new KhachHangGUI();
+        mainPanel.add(khachHangGUI, BorderLayout.CENTER);
         mainPanel.repaint();
         mainPanel.revalidate();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        
+        mainPanel.removeAll();
+        mainPanel.repaint();
+        mainPanel.revalidate();
+        
+        SIMGUI simgui = new SIMGUI();
+        mainPanel.add(simgui, BorderLayout.CENTER);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        mainPanel.removeAll();
+        mainPanel.repaint();
+        mainPanel.revalidate();
+        
+        CuocGoiGUI cuocGoiGUI = new CuocGoiGUI();
+        mainPanel.add(cuocGoiGUI, BorderLayout.CENTER);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+        
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +212,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }
