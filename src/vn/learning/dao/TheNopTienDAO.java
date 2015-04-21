@@ -16,7 +16,7 @@ import vn.learning.model.TheNopTien;
  */
 public interface TheNopTienDAO {
     public ArrayList<TheNopTien> getAllTheNop() throws SQLException;
-    public void addTheNop(TheNopTien theNopTien);
-    public void deleteTheNop(Integer id);
-    public void updateTheNop(TheNopTien theNopTien);
+    public void addTheNop(TheNopTien theNopTien) throws SQLException;
+    public void deleteTheNop(Integer id) throws SQLException;
+    public void updateTheNop(TheNopTien theNopTien) throws SQLException;
 }

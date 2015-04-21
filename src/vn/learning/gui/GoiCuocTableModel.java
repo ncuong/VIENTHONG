@@ -7,8 +7,6 @@ package vn.learning.gui;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import vn.learning.dao.GoiCuocDAO;
 import vn.learning.dao.GoiCuocDAOImpl;
@@ -31,11 +29,9 @@ public class GoiCuocTableModel extends AbstractTableModel {
     public void setGoiCuocs(ArrayList<GoiCuoc> goiCuocs) {
         this.goiCuocs = goiCuocs;
     }
-    
-    
 
-    public GoiCuocTableModel() throws SQLException{
-        
+    public GoiCuocTableModel() throws SQLException {
+
         try {
             goiCuocDAO = new GoiCuocDAOImpl();
             setGoiCuocs(goiCuocDAO.getAllGoiCuoc());
@@ -43,7 +39,7 @@ public class GoiCuocTableModel extends AbstractTableModel {
             throw ex;
         }
     }
-    
+
     @Override
     public int getRowCount() {
         return goiCuocs.size();

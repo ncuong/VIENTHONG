@@ -245,9 +245,8 @@ public class GoiCuocGUI extends javax.swing.JPanel {
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
 
-        goiCuocDAO = new GoiCuocDAOImpl();
-
         try {
+            goiCuocDAO = new GoiCuocDAOImpl();
             String tenGoiCuoc = txfTenGoiCuoc.getText();
             Integer cuocGoiNoiMang = Integer.valueOf(txfCuocGoiNoiMang.getText());
             Integer cuocGoiNgoaiMang = Integer.valueOf(txfCuocGoiNgoaiMang.getText());
@@ -271,7 +270,7 @@ public class GoiCuocGUI extends javax.swing.JPanel {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập số nguyên dương vào cước gọi và cước nhắn tin!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ko ket noi dc db");
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
 
     }//GEN-LAST:event_btnThemMoiActionPerformed
@@ -296,6 +295,7 @@ public class GoiCuocGUI extends javax.swing.JPanel {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
         try{
+            goiCuocDAO = new GoiCuocDAOImpl();
         if (id == null || id < 0) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện delete!");
         } else {
@@ -306,13 +306,14 @@ public class GoiCuocGUI extends javax.swing.JPanel {
             emptyControl();
         }
         } catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "KO ket noi dc db");
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try {
+            goiCuocDAO = new GoiCuocDAOImpl();
             if (id == null || id < 0) {
                 JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện thay đổi");
             } else {
@@ -335,7 +336,7 @@ public class GoiCuocGUI extends javax.swing.JPanel {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập số nguyên dương vào cước gọi và cước nhắn tin!");
         } catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "ko ket noi dc db");
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 

@@ -8,8 +8,6 @@ package vn.learning.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import vn.learning.model.KhachHang;
 import vn.learning.util.DataBaseUtil;
 
@@ -27,7 +25,6 @@ public class KhachHangDAOImpl implements KhachHangDAO {
         ArrayList<KhachHang> khachHangs = new ArrayList<>();
         try {
             dataBaseUtil = new DataBaseUtil();
-            
             dataBaseUtil.createConnection();
             String sql = new StringBuilder().append("SELECT * FROM KHACH_HANG").toString();
             ResultSet resultSet = dataBaseUtil.executePreparedStatement(sql);
@@ -44,7 +41,7 @@ public class KhachHangDAOImpl implements KhachHangDAO {
                 khachHang.setQueQuan(queQuan);
 
                 khachHangs.add(khachHang);
-                
+
             }
             return khachHangs;
         } catch (SQLException ex) {
@@ -52,11 +49,11 @@ public class KhachHangDAOImpl implements KhachHangDAO {
         } finally {
             dataBaseUtil.closeConnection();
         }
-        
+
     }
 
     @Override
-    public void addKhachHang(KhachHang khachHang) {
+    public void addKhachHang(KhachHang khachHang) throws SQLException {
         try {
             dataBaseUtil = new DataBaseUtil();
             String sql = new StringBuilder()
@@ -65,14 +62,14 @@ public class KhachHangDAOImpl implements KhachHangDAO {
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{khachHang.getSoCMND(), khachHang.getHoTen(), khachHang.getQueQuan()});
         } catch (SQLException ex) {
-            Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         } finally {
             dataBaseUtil.closeConnection();
         }
     }
 
     @Override
-    public void delteKhachHang(Integer id) {
+    public void delteKhachHang(Integer id) throws SQLException {
         String sql = new StringBuilder()
                 .append("DELETE FROM KHACH_HANG WHERE KHACH_HANG.ID = ?")
                 .toString();
@@ -81,7 +78,7 @@ public class KhachHangDAOImpl implements KhachHangDAO {
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{id});
         } catch (SQLException ex) {
-            Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         } finally {
             dataBaseUtil.closeConnection();
         }
@@ -89,7 +86,7 @@ public class KhachHangDAOImpl implements KhachHangDAO {
     }
 
     @Override
-    public void updateKhachHang(KhachHang khachHang) {
+    public void updateKhachHang(KhachHang khachHang) throws SQLException {
         String sql = new StringBuilder()
                 .append("UPDATE KHACH_HANG ")
                 .append("SET SO_CMND = ?, HO_TEN = ?, QUE_QUAN = ? ")
@@ -100,7 +97,7 @@ public class KhachHangDAOImpl implements KhachHangDAO {
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{khachHang.getSoCMND(), khachHang.getHoTen(), khachHang.getQueQuan(), khachHang.getId()});
         } catch (SQLException ex) {
-            Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         } finally {
             dataBaseUtil.closeConnection();
         }

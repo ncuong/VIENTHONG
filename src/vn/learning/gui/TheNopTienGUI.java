@@ -51,7 +51,6 @@ public class TheNopTienGUI extends javax.swing.JPanel {
     public TheNopTienGUI() throws SQLException{
         initComponents();
         try {
-            
             fillDataToTable();
         } catch (SQLException ex) {
             throw ex;
@@ -86,11 +85,11 @@ public class TheNopTienGUI extends javax.swing.JPanel {
         cbTrangThai = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnThemMoi = new javax.swing.JButton();
+        btnThayDoi = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -204,39 +203,39 @@ public class TheNopTienGUI extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jButton4.setText("Clear");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton4);
+        jPanel3.add(btnClear);
 
         jPanel2.add(jPanel3, java.awt.BorderLayout.WEST);
 
-        jButton1.setText("Thêm mới");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnThemMoi.setText("Thêm mới");
+        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnThemMoiActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton1);
+        jPanel4.add(btnThemMoi);
 
-        jButton2.setText("Thay đổi");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnThayDoi.setText("Thay đổi");
+        btnThayDoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnThayDoiActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton2);
+        jPanel4.add(btnThayDoi);
 
-        jButton3.setText("Xóa");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnXoaActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton3);
+        jPanel4.add(btnXoa);
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.EAST);
 
@@ -267,7 +266,7 @@ public class TheNopTienGUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tblTheNopTienMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         try {
             if (id == null || id < 0) {
                 JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng để thực hiện delete!");
@@ -281,9 +280,9 @@ public class TheNopTienGUI extends javax.swing.JPanel {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnXoaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
 
         try {
             String soSeri = txfSoSeri.getText();
@@ -317,9 +316,9 @@ public class TheNopTienGUI extends javax.swing.JPanel {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnThemMoiActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnThayDoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThayDoiActionPerformed
         try {
             if (id == null || id < 0) {
                 JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện update!");
@@ -351,20 +350,20 @@ public class TheNopTienGUI extends javax.swing.JPanel {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnThayDoiActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         emptyControl();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnClearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnThayDoi;
+    private javax.swing.JButton btnThemMoi;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JCheckBox cbTrangThai;
     private com.toedter.calendar.JDateChooser dateChooseThoiGianNop;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;

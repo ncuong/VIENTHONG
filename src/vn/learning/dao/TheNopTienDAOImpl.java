@@ -22,11 +22,12 @@ import vn.learning.util.DataBaseUtil;
 public class TheNopTienDAOImpl implements TheNopTienDAO{
 
     
-    DataBaseUtil dataBaseUtil = new DataBaseUtil();
+    DataBaseUtil dataBaseUtil;
     @Override
     public ArrayList<TheNopTien> getAllTheNop() throws SQLException{
         ArrayList<TheNopTien> theNopTiens = new ArrayList<>();
         try {
+            dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
             String sql = new StringBuilder().append("SELECT * FROM THE_NOP_TIEN").toString();
             ResultSet resultSet = dataBaseUtil.executePreparedStatement(sql);
@@ -55,48 +56,52 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
     }
 
     @Override
-    public void addTheNop(TheNopTien theNopTien) {
-        
-        try {
-            String sql = new StringBuilder()
+    public void addTheNop(TheNopTien theNopTien) throws SQLException{
+        String sql = new StringBuilder()
                     .append("INSERT INTO THE_NOP_TIEN(SO_SERI, MENH_GIA, THOI_GIAN_NOP, TRANG_THAI) VALUES(?,?,?,?)")
                     .toString();
+        try {
+            
+            dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{theNopTien.getSoSeri(), theNopTien.getMenhGia(), theNopTien.getThoiGianNop(), theNopTien.isTrangThai()});
         } catch (SQLException ex) {
-            Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         } finally {
             dataBaseUtil.closeConnection();
         }
     }
 
     @Override
-    public void deleteTheNop(Integer id) {
+    public void deleteTheNop(Integer id) throws SQLException{
         String sql = new StringBuilder()
                 .append("DELETE FROM THE_NOP_TIEN WHERE THE_NOP_TIEN.ID = ?")
                 .toString();
         try {
+            dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{id});
         } catch (SQLException ex) {
-            Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         } finally {
             dataBaseUtil.closeConnection();
         }
     }
 
     @Override
-    public void updateTheNop(TheNopTien theNop) {
-        try {
-            String sql = new StringBuilder()
+    public void updateTheNop(TheNopTien theNop) throws SQLException{
+        String sql = new StringBuilder()
                     .append("UPDATE THE_NOP_TIEN ")
                     .append("SET SO_SERI = ?, MENH_GIA = ?, THOI_GIAN_NOP = ?, TRANG_THAI = ? ")
                     .append("WHERE ID = ?")
                     .toString();
+        try {
+            
+            dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{theNop.getSoSeri(), theNop.getMenhGia(), theNop.getThoiGianNop(), theNop.isTrangThai(), theNop.getId()});
         } catch (SQLException ex) {
-            Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         } finally {
             dataBaseUtil.closeConnection();
         }

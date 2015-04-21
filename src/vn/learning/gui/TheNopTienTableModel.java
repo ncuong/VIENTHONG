@@ -20,7 +20,6 @@ public class TheNopTienTableModel extends AbstractTableModel {
 
     private String[] columnNames = {"ID", "Số Seri", "Mệnh giá", "Thời gian nộp", "Trạng thái"};
     private TheNopTienDAO theNopTienDAO;
-//    private ArrayList<TheNopTien> theNopTiens = theNopTienDAO.getAllTheNop();
     private ArrayList<TheNopTien> theNopTiens;
 
     public ArrayList<TheNopTien> getTheNopTiens() {
