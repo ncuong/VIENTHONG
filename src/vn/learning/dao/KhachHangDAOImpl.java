@@ -22,10 +22,11 @@ public class KhachHangDAOImpl implements KhachHangDAO {
     @Override
     public ArrayList<KhachHang> getAllKhachHang() throws SQLException {
         ArrayList<KhachHang> khachHangs = new ArrayList<>();
+        String sql = new StringBuilder().append("SELECT * FROM KHACH_HANG").toString();
         try {
             dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
-            String sql = new StringBuilder().append("SELECT * FROM KHACH_HANG").toString();
+            
             ResultSet resultSet = dataBaseUtil.executePreparedStatement(sql);
             while (resultSet.next()) {
                 KhachHang khachHang = new KhachHang();

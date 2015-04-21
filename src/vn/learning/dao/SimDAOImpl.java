@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vn.learning.dao;
 
 import java.sql.SQLException;
@@ -15,13 +14,21 @@ import vn.learning.util.DataBaseUtil;
  *
  * @author Admin
  */
-public class SimDAOImpl implements SimDAO{
+public class SimDAOImpl implements SimDAO {
 
     private DataBaseUtil dataBaseUtil;
-    
+
     @Override
     public ArrayList<Sim> getAllSim() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Sim> sims = new ArrayList<>();
+        String sql = new StringBuilder().append("SELECT * FROM KHACH_HANG").toString();
+        try {
+            dataBaseUtil = new DataBaseUtil();
+            dataBaseUtil.createConnection();
+        } catch (SQLException ex) {
+            throw ex;
+        }
+        return sims;
     }
 
     @Override
@@ -38,5 +45,5 @@ public class SimDAOImpl implements SimDAO{
     public void deleteSim(Integer id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
