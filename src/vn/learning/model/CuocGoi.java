@@ -6,7 +6,7 @@
 
 package vn.learning.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  *
@@ -15,8 +15,8 @@ import java.sql.Timestamp;
 public class CuocGoi {
     private Integer id;
     private String thueBaoDuocGoi;
-    private Timestamp thoiGianBatDau;
-    private Timestamp thoiGianKetThuc;
+    private Date thoiGianBatDau;
+    private Date thoiGianKetThuc;
 
     public Integer getId() {
         return id;
@@ -34,19 +34,19 @@ public class CuocGoi {
         this.thueBaoDuocGoi = thueBaoDuocGoi;
     }
 
-    public Timestamp getThoiGianBatDau() {
+    public Date getThoiGianBatDau() {
         return thoiGianBatDau;
     }
 
-    public void setThoiGianBatDau(Timestamp thoiGianBatDau) {
+    public void setThoiGianBatDau(Date thoiGianBatDau) {
         this.thoiGianBatDau = thoiGianBatDau;
     }
 
-    public Timestamp getThoiGianKetThuc() {
+    public Date getThoiGianKetThuc() {
         return thoiGianKetThuc;
     }
 
-    public void setThoiGianKetThuc(Timestamp thoiGianKetThuc) {
+    public void setThoiGianKetThuc(Date thoiGianKetThuc) {
         this.thoiGianKetThuc = thoiGianKetThuc;
     }
     

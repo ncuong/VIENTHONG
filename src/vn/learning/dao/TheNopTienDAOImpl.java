@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vn.learning.dao;
 
 import java.sql.Date;
@@ -17,17 +16,19 @@ import vn.learning.util.DataBaseUtil;
  *
  * @author Admin
  */
-public class TheNopTienDAOImpl implements TheNopTienDAO{
+public class TheNopTienDAOImpl implements TheNopTienDAO {
 
-    
     private DataBaseUtil dataBaseUtil;
+
     @Override
-    public ArrayList<TheNopTien> getAllTheNop() throws SQLException{
+    public ArrayList<TheNopTien> getAllTheNop() throws SQLException {
         ArrayList<TheNopTien> theNopTiens = new ArrayList<>();
+        String sql = new StringBuilder().append("SELECT * FROM THE_NOP_TIEN").toString();
+        
         try {
             dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
-            String sql = new StringBuilder().append("SELECT * FROM THE_NOP_TIEN").toString();
+
             ResultSet resultSet = dataBaseUtil.executePreparedStatement(sql);
             while (resultSet.next()) {
                 TheNopTien theNopTien = new TheNopTien();
@@ -36,13 +37,13 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
                 Integer menhGia = resultSet.getInt("MENH_GIA");
                 Date thoiGianNop = resultSet.getDate("THOI_GIAN_NOP");
                 Boolean trangThai = resultSet.getBoolean("TRANG_THAI");
-                
+
                 theNopTien.setId(id);
                 theNopTien.setSoSeri(soSeri);
                 theNopTien.setMenhGia(menhGia);
                 theNopTien.setThoiGianNop(thoiGianNop);
                 theNopTien.setTrangThai(trangThai);
-                
+
                 theNopTiens.add(theNopTien);
             }
         } catch (SQLException ex) {
@@ -54,12 +55,12 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
     }
 
     @Override
-    public void addTheNop(TheNopTien theNopTien) throws SQLException{
+    public void addTheNop(TheNopTien theNopTien) throws SQLException {
         String sql = new StringBuilder()
-                    .append("INSERT INTO THE_NOP_TIEN(SO_SERI, MENH_GIA, THOI_GIAN_NOP, TRANG_THAI) VALUES(?,?,?,?)")
-                    .toString();
+                .append("INSERT INTO THE_NOP_TIEN(SO_SERI, MENH_GIA, THOI_GIAN_NOP, TRANG_THAI) VALUES(?,?,?,?)")
+                .toString();
         try {
-            
+
             dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{theNopTien.getSoSeri(), theNopTien.getMenhGia(), theNopTien.getThoiGianNop(), theNopTien.isTrangThai()});
@@ -71,7 +72,7 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
     }
 
     @Override
-    public void deleteTheNop(Integer id) throws SQLException{
+    public void deleteTheNop(Integer id) throws SQLException {
         String sql = new StringBuilder()
                 .append("DELETE FROM THE_NOP_TIEN WHERE THE_NOP_TIEN.ID = ?")
                 .toString();
@@ -87,14 +88,14 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
     }
 
     @Override
-    public void updateTheNop(TheNopTien theNop) throws SQLException{
+    public void updateTheNop(TheNopTien theNop) throws SQLException {
         String sql = new StringBuilder()
-                    .append("UPDATE THE_NOP_TIEN ")
-                    .append("SET SO_SERI = ?, MENH_GIA = ?, THOI_GIAN_NOP = ?, TRANG_THAI = ? ")
-                    .append("WHERE ID = ?")
-                    .toString();
+                .append("UPDATE THE_NOP_TIEN ")
+                .append("SET SO_SERI = ?, MENH_GIA = ?, THOI_GIAN_NOP = ?, TRANG_THAI = ? ")
+                .append("WHERE ID = ?")
+                .toString();
         try {
-            
+
             dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
             dataBaseUtil.executeUpdate(sql, new Object[]{theNop.getSoSeri(), theNop.getMenhGia(), theNop.getThoiGianNop(), theNop.isTrangThai(), theNop.getId()});
@@ -104,5 +105,5 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
             dataBaseUtil.closeConnection();
         }
     }
-    
+
 }
