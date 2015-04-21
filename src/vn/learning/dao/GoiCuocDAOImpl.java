@@ -8,8 +8,6 @@ package vn.learning.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import vn.learning.model.GoiCuoc;
 import vn.learning.util.DataBaseUtil;
 
@@ -19,7 +17,7 @@ import vn.learning.util.DataBaseUtil;
  */
 public class GoiCuocDAOImpl implements GoiCuocDAO {
 
-    DataBaseUtil dataBaseUtil;
+    private DataBaseUtil dataBaseUtil;
 
     @Override
     public ArrayList<GoiCuoc> getAllGoiCuoc() throws SQLException {

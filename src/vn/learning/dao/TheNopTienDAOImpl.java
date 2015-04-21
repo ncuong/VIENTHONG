@@ -10,8 +10,6 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import vn.learning.model.TheNopTien;
 import vn.learning.util.DataBaseUtil;
 
@@ -22,7 +20,7 @@ import vn.learning.util.DataBaseUtil;
 public class TheNopTienDAOImpl implements TheNopTienDAO{
 
     
-    DataBaseUtil dataBaseUtil;
+    private DataBaseUtil dataBaseUtil;
     @Override
     public ArrayList<TheNopTien> getAllTheNop() throws SQLException{
         ArrayList<TheNopTien> theNopTiens = new ArrayList<>();

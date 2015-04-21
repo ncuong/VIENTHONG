@@ -17,8 +17,7 @@ import vn.learning.util.DataBaseUtil;
  */
 public class KhachHangDAOImpl implements KhachHangDAO {
 
-//    DataBaseUtil dataBaseUtil = new DataBaseUtil();
-    DataBaseUtil dataBaseUtil;
+    private DataBaseUtil dataBaseUtil;
 
     @Override
     public ArrayList<KhachHang> getAllKhachHang() throws SQLException {

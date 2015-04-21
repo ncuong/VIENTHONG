@@ -18,6 +18,33 @@ public class Sim {
     private Timestamp ngayDangKy;
     private Integer taiKhoanChinh;
     private Integer taiKhoanKhuyenMai;
+    private KhachHang khachHang;
+    private CuocGoi cuocGoi;
+    private GoiCuoc goiCuoc;
+
+    public KhachHang getKhachHang() {
+        return khachHang;
+    }
+
+    public void setKhachHang(KhachHang khachHang) {
+        this.khachHang = khachHang;
+    }
+
+    public CuocGoi getCuocGoi() {
+        return cuocGoi;
+    }
+
+    public void setCuocGoi(CuocGoi cuocGoi) {
+        this.cuocGoi = cuocGoi;
+    }
+
+    public GoiCuoc getGoiCuoc() {
+        return goiCuoc;
+    }
+
+    public void setGoiCuoc(GoiCuoc goiCuoc) {
+        this.goiCuoc = goiCuoc;
+    }
 
     public Integer getId() {
         return id;
