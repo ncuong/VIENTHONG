@@ -5,6 +5,7 @@
  */
 package vn.learning.gui;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import vn.learning.dao.TheNopTienDAO;
@@ -18,8 +19,26 @@ import vn.learning.model.TheNopTien;
 public class TheNopTienTableModel extends AbstractTableModel {
 
     private String[] columnNames = {"ID", "Số Seri", "Mệnh giá", "Thời gian nộp", "Trạng thái"};
-    private TheNopTienDAO theNopTienDAO = new TheNopTienDAOImpl();
-    private ArrayList<TheNopTien> theNopTiens = theNopTienDAO.getAllTheNop();
+    private TheNopTienDAO theNopTienDAO;
+//    private ArrayList<TheNopTien> theNopTiens = theNopTienDAO.getAllTheNop();
+    private ArrayList<TheNopTien> theNopTiens;
+
+    public ArrayList<TheNopTien> getTheNopTiens() {
+        return theNopTiens;
+    }
+
+    public void setTheNopTiens(ArrayList<TheNopTien> theNopTiens) {
+        this.theNopTiens = theNopTiens;
+    }
+
+    public TheNopTienTableModel() throws SQLException {
+        try {
+            theNopTienDAO = new TheNopTienDAOImpl();
+            setTheNopTiens(theNopTienDAO.getAllTheNop());
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
 
     @Override
     public int getRowCount() {

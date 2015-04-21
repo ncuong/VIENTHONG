@@ -24,7 +24,7 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
     
     DataBaseUtil dataBaseUtil = new DataBaseUtil();
     @Override
-    public ArrayList<TheNopTien> getAllTheNop() {
+    public ArrayList<TheNopTien> getAllTheNop() throws SQLException{
         ArrayList<TheNopTien> theNopTiens = new ArrayList<>();
         try {
             dataBaseUtil.createConnection();
@@ -47,7 +47,7 @@ public class TheNopTienDAOImpl implements TheNopTienDAO{
                 theNopTiens.add(theNopTien);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TheNopTienDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         } finally {
             dataBaseUtil.closeConnection();
         }

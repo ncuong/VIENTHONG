@@ -5,7 +5,7 @@
  */
 package vn.learning.gui;
 
-import java.sql.Date;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import vn.learning.dao.TheNopTienDAO;
 import vn.learning.dao.TheNopTienDAOImpl;
@@ -28,10 +28,14 @@ public class TheNopTienGUI extends javax.swing.JPanel {
         this.id = id;
     }
 
-    private void fillDataToTable() {
-        tblTheNopTien.setModel(new TheNopTienTableModel());
-        tblTheNopTien.repaint();
-        tblTheNopTien.revalidate();
+    private void fillDataToTable() throws SQLException {
+        try {
+            tblTheNopTien.setModel(new TheNopTienTableModel());
+            tblTheNopTien.repaint();
+            tblTheNopTien.revalidate();
+        } catch (SQLException ex) {
+            throw ex;
+        }
     }
 
     private void emptyControl() {
@@ -44,9 +48,14 @@ public class TheNopTienGUI extends javax.swing.JPanel {
     /**
      * Creates new form TheNop
      */
-    public TheNopTienGUI() {
+    public TheNopTienGUI() throws SQLException{
         initComponents();
-        fillDataToTable();
+        try {
+            
+            fillDataToTable();
+        } catch (SQLException ex) {
+            throw ex;
+        }
     }
 
     /**
@@ -259,14 +268,18 @@ public class TheNopTienGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_tblTheNopTienMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (id == null || id < 0) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng để thực hiện delete!");
-        } else {
-            theNopTienDAO = new TheNopTienDAOImpl();
-            theNopTienDAO.deleteTheNop(id);
-            JOptionPane.showMessageDialog(null, "Delete thành công!");
-            fillDataToTable();
-            emptyControl();
+        try {
+            if (id == null || id < 0) {
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng để thực hiện delete!");
+            } else {
+                theNopTienDAO = new TheNopTienDAOImpl();
+                theNopTienDAO.deleteTheNop(id);
+                JOptionPane.showMessageDialog(null, "Delete thành công!");
+                fillDataToTable();
+                emptyControl();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -301,6 +314,8 @@ public class TheNopTienGUI extends javax.swing.JPanel {
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập số nguyên dương vào mục Mệnh giá!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -333,6 +348,8 @@ public class TheNopTienGUI extends javax.swing.JPanel {
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập vào số nguyên dương ở mục thẻ nộp tiền!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
