@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vn.learning.gui;
 
 import java.sql.SQLException;
@@ -22,12 +21,23 @@ public class SIMGUI extends javax.swing.JPanel {
      * Creates new form SIMGUI
      */
     private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     private SimDAO simDAO;
+
     public SIMGUI() throws SQLException {
         initComponents();
         fillDataToTable();
     }
- private void fillDataToTable() throws SQLException {
+
+    private void fillDataToTable() throws SQLException {
         try {
             tableSim.setModel(new SimTableModel());
             tableSim.repaint();
@@ -45,8 +55,9 @@ public class SIMGUI extends javax.swing.JPanel {
         textIDKhachHang.setText("");
         textCuocGoi.setText("");
         textGoiCuoc.setText("");
-                
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -275,17 +286,16 @@ public class SIMGUI extends javax.swing.JPanel {
 
             simDAO = new SimDAOImpl();
             String soThueBao = textSoThueBao.getText();
-          
+
 //            Date date1 = new Date();
 //	    sim.setNgayDangKy(new Timestamp(date1.getTime()));
-
             Integer ngayDangKy = Integer.valueOf(textNgayDangKy.getText());
             Integer taiKhoanChinh = Integer.valueOf(textTaiKhoanChinh.getText());
             Integer taiKhoanKhuyenMai = Integer.valueOf(textTaiKhoanKhuyenMai.getText());
             Integer khachHangID = Integer.valueOf(textIDKhachHang.getText());
             Integer goiCuocID = Integer.valueOf(textGoiCuoc.getText());
             Integer cuocGoiID = Integer.valueOf(textCuocGoi.getText());
-              
+
             Sim sim = new Sim();
             sim.setSoThueBao(soThueBao);
 //            sim.setNgayDangKy(ngayDangKy);
@@ -326,7 +336,6 @@ public class SIMGUI extends javax.swing.JPanel {
                 sim.setKhachHangID(Integer.valueOf(textIDKhachHang.getText()));
                 sim.setGoiCuocID(Integer.valueOf(textGoiCuoc.getText()));
                 sim.setCuocGoiID(Integer.valueOf(textCuocGoi.getText()));
-               
 
                 simDAO.updateSim(sim);
                 JOptionPane.showMessageDialog(null, "Đã update thành công!");
@@ -336,14 +345,14 @@ public class SIMGUI extends javax.swing.JPanel {
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập số nguyên dương vào cước gọi và cước nhắn tin!");
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
-        try{
+        try {
             simDAO = new SimDAOImpl();
             if (id <= 0) {
                 JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện delete!");
@@ -354,7 +363,7 @@ public class SIMGUI extends javax.swing.JPanel {
                 fillDataToTable();
                 emptyControl();
             }
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
