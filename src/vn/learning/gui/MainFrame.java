@@ -173,22 +173,28 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
-
-        SIMGUI simgui = new SIMGUI();
-        mainPanel.add(simgui, BorderLayout.CENTER);
-        mainPanel.repaint();
-        mainPanel.revalidate();
+        try {
+            SIMGUI simgui = new SIMGUI();
+            mainPanel.add(simgui, BorderLayout.CENTER);
+            mainPanel.repaint();
+            mainPanel.revalidate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
+        }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void menuCuocGoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCuocGoiActionPerformed
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
-
-        CuocGoiGUI cuocGoiGUI = new CuocGoiGUI();
-        mainPanel.add(cuocGoiGUI, BorderLayout.CENTER);
-        mainPanel.repaint();
-        mainPanel.revalidate();
+        try {
+            CuocGoiGUI cuocGoiGUI = new CuocGoiGUI();
+            mainPanel.add(cuocGoiGUI, BorderLayout.CENTER);
+            mainPanel.repaint();
+            mainPanel.revalidate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
+        }
 
     }//GEN-LAST:event_menuCuocGoiActionPerformed
 

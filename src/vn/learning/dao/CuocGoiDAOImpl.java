@@ -38,8 +38,6 @@ public class CuocGoiDAOImpl implements CuocGoiDAO {
                 
                 cuocGoi.setId(id);
                 cuocGoi.setThueBaoDuocGoi(thueBaoDuocGoi);
-//                cuocGoi.setThoiGianBatDau(thoiGianBatDau);
-//                cuocGoi.setThoiGianKetThuc(thoiGianKetThuc);
                 
             }
         } catch (SQLException ex) {
@@ -50,17 +48,52 @@ public class CuocGoiDAOImpl implements CuocGoiDAO {
 
     @Override
     public void addCuocGoi(CuocGoi cuocGoi) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String sql = new StringBuilder()
+                .append("INSERT INTO CUOC_GOI VALUES(?,?,?)")
+                .toString();
+        try {
+            dataBaseUtil = new DataBaseUtil();
+            dataBaseUtil.createConnection();
+            dataBaseUtil.executeUpdate(sql, new Object[]{cuocGoi.getThueBaoDuocGoi(), cuocGoi.getThoiGianBatDau(), cuocGoi.getThoiGianKetThuc()});
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            dataBaseUtil.closeConnection();
+        }
     }
 
     @Override
     public void updateCuocGoi(CuocGoi cuocGoi) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String sql = new StringBuilder()
+                .append("UPDATE CUOC_GOI ")
+                .append("THUE_BAO_DUOC_GOI = ?, THOI_GIAN_BAT_DAU = ?, THOI_GIAN_KET_THUC = ? ")
+                .append("WHERE ID = ?")
+                .toString();
+        try {
+            dataBaseUtil = new DataBaseUtil();
+            dataBaseUtil.createConnection();
+            dataBaseUtil.executeUpdate(sql, new Object[]{cuocGoi.getThueBaoDuocGoi(), cuocGoi.getThoiGianBatDau(), cuocGoi.getThoiGianKetThuc()});
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            dataBaseUtil.closeConnection();
+        }
     }
 
     @Override
     public void deleteCuocGoi(Integer id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = new StringBuilder()
+                .append("DELETE FROM CUOC_GOI WHERE CUOC_GOI.ID = ?")
+                .toString();
+        try {
+            dataBaseUtil = new DataBaseUtil();
+            dataBaseUtil.createConnection();
+            dataBaseUtil.executeUpdate(sql, new Object[]{id});
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            dataBaseUtil.closeConnection();
+        }
     }
 
 }

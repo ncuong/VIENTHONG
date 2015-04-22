@@ -6,6 +6,16 @@
 
 package vn.learning.gui;
 
+import java.sql.Date;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import vn.learning.dao.CuocGoiDAO;
+import vn.learning.dao.CuocGoiDAOImpl;
+import vn.learning.dao.TheNopTienDAO;
+import vn.learning.dao.TheNopTienDAOImpl;
+import vn.learning.model.CuocGoi;
+import vn.learning.model.TheNopTien;
+
 /**
  *
  * @author Admin
@@ -15,8 +25,28 @@ public class CuocGoiGUI extends javax.swing.JPanel {
     /**
      * Creates new form CuocGoiGUI
      */
-    public CuocGoiGUI() {
+     private CuocGoiDAO cuocGoiDAO;
+    private Integer id;
+
+    private void fillDataToTable() throws SQLException {
+        try {
+            tableCuocGoi.setModel(new CuocGoiTableModel());
+            tableCuocGoi.repaint();
+            tableCuocGoi.revalidate();
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
+
+    private void emptyControl() {
+        textThueBao.setText("");
+        dateStart.setDate(null);
+        dateEnd.setDate(null);
+    }
+
+    public CuocGoiGUI() throws SQLException {
         initComponents();
+        fillDataToTable();
     }
 
     /**
@@ -28,33 +58,270 @@ public class CuocGoiGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        btnClear = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        btnThemMoi = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        textThueBao = new javax.swing.JTextField();
+        dateStart = new com.toedter.calendar.JDateChooser();
+        dateEnd = new com.toedter.calendar.JDateChooser();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableCuocGoi = new javax.swing.JTable();
 
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
+        setLayout(new java.awt.BorderLayout());
 
-        jButton1.setText("Cuộc gọi");
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jButton1)
-                .addContainerGap(682, Short.MAX_VALUE))
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnClear);
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.WEST);
+
+        btnThemMoi.setText("Thêm mới");
+        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemMoiActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnThemMoi);
+
+        btnUpdate.setText("Thay đổi");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnUpdate);
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnDelete);
+
+        jPanel3.add(jPanel5, java.awt.BorderLayout.EAST);
+
+        add(jPanel3, java.awt.BorderLayout.SOUTH);
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jLabel1.setText("Thue bao duoc goi: ");
+
+        jLabel2.setText("Thoi gian bat dau: ");
+
+        jLabel3.setText("Thoi gian ket thuc: ");
+
+        dateStart.setDateFormatString("MM/dd/ yyyy");
+
+        dateEnd.setDateFormatString("MM/dd/ yyyy");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(167, 167, 167)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1))
+                    .addComponent(jLabel3))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textThueBao, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateStart, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(jButton1)
-                .addContainerGap(486, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(textThueBao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(dateStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(dateEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.SOUTH);
+
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        tableCuocGoi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tableCuocGoi);
+
+        jPanel6.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel6, java.awt.BorderLayout.CENTER);
+
+        add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        emptyControl();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
+
+       try {
+            java.util.Date date1 = dateStart.getDate();
+            java.util.Date date2= dateEnd.getDate();
+            
+            java.sql.Date thoiGianBatDau;
+            if (date1 == null) {
+                thoiGianBatDau = null;
+            } else {
+                thoiGianBatDau = new java.sql.Date(date1.getTime());
+            }
+             java.sql.Date thoiGianKetThuc;
+             if (date2 == null) {
+                thoiGianKetThuc = null;
+            } else {
+                thoiGianKetThuc = new java.sql.Date(date2.getTime());
+            }
+
+
+            CuocGoi cuocGoi = new CuocGoi();
+            cuocGoi.setThueBaoDuocGoi(textThueBao.getText());
+            cuocGoi.setThoiGianBatDau(thoiGianBatDau);
+            cuocGoi.setThoiGianKetThuc(thoiGianKetThuc);
+            
+
+            cuocGoiDAO = new CuocGoiDAOImpl();
+            cuocGoiDAO.addCuocGoi(cuocGoi);
+
+            JOptionPane.showMessageDialog(null, "Đã thêm vào thành công!");
+
+            fillDataToTable();
+            emptyControl();
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập số nguyên dương vào mục Mệnh giá!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
+        }
+    }//GEN-LAST:event_btnThemMoiActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        try {
+            cuocGoiDAO = new CuocGoiDAOImpl();
+            if (id <= 0) {
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện thay đổi");
+            } else {
+                cuocGoiDAO = new CuocGoiDAOImpl();
+
+                CuocGoi cuocGoi = new CuocGoi();
+                cuocGoi.setId(id);
+                
+                 java.util.Date date1 = dateStart.getDate();
+                 java.util.Date date2= dateEnd.getDate();
+            
+                java.sql.Date thoiGianBatDau;
+                if (date1 == null) {
+                thoiGianBatDau = null;
+                } else {
+                thoiGianBatDau = new java.sql.Date(date1.getTime());
+                   }
+             java.sql.Date thoiGianKetThuc;
+                if (date2 == null) {
+                thoiGianKetThuc = null;
+                } else {
+                thoiGianKetThuc = new java.sql.Date(date2.getTime());
+                 }
+                cuocGoi.setThueBaoDuocGoi(textThueBao.getText());
+                cuocGoi.setThoiGianBatDau(thoiGianBatDau);
+                cuocGoi.setThoiGianKetThuc(thoiGianKetThuc);
+               
+
+                cuocGoiDAO.updateCuocGoi(cuocGoi);
+                JOptionPane.showMessageDialog(null, "Đã update thành công!");
+                fillDataToTable();
+                emptyControl();
+
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập số nguyên dương vào cước gọi và cước nhắn tin!");
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        try{
+            cuocGoiDAO = new CuocGoiDAOImpl();
+            if (id <= 0) {
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện delete!");
+            } else {
+                cuocGoiDAO = new CuocGoiDAOImpl();
+                cuocGoiDAO.deleteCuocGoi(id);
+                JOptionPane.showMessageDialog(null, "Delete thành công!");
+                fillDataToTable();
+                emptyControl();
+            }
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnThemMoi;
+    private javax.swing.JButton btnUpdate;
+    private com.toedter.calendar.JDateChooser dateEnd;
+    private com.toedter.calendar.JDateChooser dateStart;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tableCuocGoi;
+    private javax.swing.JTextField textThueBao;
     // End of variables declaration//GEN-END:variables
 }

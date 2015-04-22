@@ -19,14 +19,12 @@ import vn.learning.util.DataBaseUtil;
 public class SimDAOImpl implements SimDAO {
 
     private DataBaseUtil dataBaseUtil;
-    private KhachHangDAO khachHangDAO;
-//    private CuocGoiDAO cuocGoiDAO;
     
 
     @Override
     public ArrayList<Sim> getAllSim() throws SQLException {
         ArrayList<Sim> sims = new ArrayList<>();
-        String sql = new StringBuilder().append("SELECT * FROM KHACH_HANG").toString();//have to change this line
+        String sql = new StringBuilder().append("SELECT * FROM SIM").toString();//have to change this line
         try {
             dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
@@ -58,17 +56,52 @@ public class SimDAOImpl implements SimDAO {
 
     @Override
     public void addSim(Sim sim) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = new StringBuilder()
+                .append("INSERT INTO SIM VALUES(?,?,?,?,?,?,?)")
+                .toString();
+        try {
+            dataBaseUtil = new DataBaseUtil();
+            dataBaseUtil.createConnection();
+            dataBaseUtil.executeUpdate(sql, new Object[]{sim.getSoThueBao(), sim.getNgayDangKy(), sim.getTaiKhoanChinh(), sim.getTaiKhoanKhuyenMai(), sim.getKhachHangID(), sim.getGoiCuocID(), sim.getCuocGoiID()});
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            dataBaseUtil.closeConnection();
+        }
     }
 
     @Override
     public void updateSim(Sim sim) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String sql = new StringBuilder()
+                .append("UPDATE SIM ")
+                .append("SET SO_THUE_BAO = ?, NGAY_DANG_KY = ?, TAI_KHOAN_CHINH = ?, TAI_KHOAN_KHUYEN_MAI = ?, KHACH_HANG_ID = ?, GOC_CUOC=?, CUOC_GOI=? ")
+                .append("WHERE ID = ?")
+                .toString();
+        try {
+            dataBaseUtil = new DataBaseUtil();
+            dataBaseUtil.createConnection();
+            dataBaseUtil.executeUpdate(sql, new Object[]{sim.getSoThueBao(), sim.getNgayDangKy(), sim.getTaiKhoanChinh(), sim.getTaiKhoanKhuyenMai(), sim.getKhachHangID(), sim.getGoiCuocID(), sim.getCuocGoiID()});
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            dataBaseUtil.closeConnection();
+        }
     }
 
     @Override
     public void deleteSim(Integer id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = new StringBuilder()
+                .append("DELETE FROM SIM WHERE SIM.ID = ?")
+                .toString();
+        try {
+            dataBaseUtil = new DataBaseUtil();
+            dataBaseUtil.createConnection();
+            dataBaseUtil.executeUpdate(sql, new Object[]{id});
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            dataBaseUtil.closeConnection();
+        }
     }
 
 }

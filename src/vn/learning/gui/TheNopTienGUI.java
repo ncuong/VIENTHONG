@@ -288,6 +288,7 @@ public class TheNopTienGUI extends javax.swing.JPanel {
             String soSeri = txfSoSeri.getText();
             Integer menhGia = Integer.valueOf(txfMenhGia.getText());
             java.util.Date date = dateChooseThoiGianNop.getDate();
+            
             java.sql.Date thoiGianNop;
             if (date == null) {
                 thoiGianNop = null;
@@ -331,6 +332,7 @@ public class TheNopTienGUI extends javax.swing.JPanel {
                 theNopTien.setTrangThai(Boolean.valueOf(cbTrangThai.isSelected()));
 
                 java.util.Date date = dateChooseThoiGianNop.getDate();
+                
                 java.sql.Date thoiGianNop;
                 if (date == null) {
                     thoiGianNop = null;
