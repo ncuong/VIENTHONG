@@ -82,13 +82,13 @@ public class SimDAOImpl implements SimDAO {
     public void updateSim(Sim sim) throws SQLException {
          String sql = new StringBuilder()
                 .append("UPDATE SIM ")
-                .append("SET SO_THUE_BAO = ?, NGAY_DANG_KY = ?, TAI_KHOAN_CHINH = ?, TAI_KHOAN_KHUYEN_MAI = ?, KHACH_HANG_ID = ?, GOC_CUOC=?, CUOC_GOI=? ")
+                .append("SET SO_THUE_BAO = ?, NGAY_DANG_KY = ?, TAI_KHOAN_CHINH = ?, TAI_KHOAN_KHUYEN_MAI = ?, KHACH_HANG_ID = ?, GOI_CUOC_ID=?, CUOC_GOI_ID=? ")
                 .append("WHERE ID = ?")
                 .toString();
         try {
             dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
-            dataBaseUtil.executeUpdate(sql, new Object[]{sim.getSoThueBao(), sim.getNgayDangKy(), sim.getTaiKhoanChinh(), sim.getTaiKhoanKhuyenMai(), sim.getKhachHangID(), sim.getGoiCuocID(), sim.getCuocGoiID()});
+            dataBaseUtil.executeUpdate(sql, new Object[]{sim.getSoThueBao(), sim.getNgayDangKy(), sim.getTaiKhoanChinh(), sim.getTaiKhoanKhuyenMai(), sim.getKhachHangID(), sim.getGoiCuocID(), sim.getCuocGoiID(), sim.getId()});
         } catch (SQLException ex) {
             throw ex;
         } finally {

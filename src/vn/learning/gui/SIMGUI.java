@@ -343,7 +343,18 @@ public class SIMGUI extends javax.swing.JPanel {
                 Sim sim = new Sim();
                 sim.setId(id);
                 sim.setSoThueBao(txfSoThueBao.getText());
-//                sim.setNgayDangKy(Integer.valueOf(textNgayDangKy.getText()));
+                
+                java.util.Date date = dateChooseNgayDangKy.getDate();
+                
+                java.sql.Date ngayDangKy;
+                if (date == null) {
+                    ngayDangKy = null;
+                } else {
+                    ngayDangKy = new java.sql.Date(date.getTime());
+                }
+                
+                sim.setNgayDangKy(ngayDangKy);
+                
                 sim.setTaiKhoanChinh(Integer.valueOf(txfTaiKhoanChinh.getText()));
                 sim.setTaiKhoanKhuyenMai(Integer.valueOf(txfTaiKhoanKhuyenMai.getText()));
                 sim.setKhachHangID(Integer.valueOf(txfIdKhachHang.getText()));
