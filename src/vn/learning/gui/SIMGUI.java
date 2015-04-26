@@ -29,32 +29,37 @@ public class SIMGUI extends javax.swing.JPanel {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     private SimDAO simDAO;
 
     public SIMGUI() throws SQLException {
         initComponents();
-        fillDataToTable();
+        try {
+            fillDataToTable();
+        } catch (SQLException ex) {
+            throw ex;
+        }
+
     }
 
     private void fillDataToTable() throws SQLException {
         try {
-            tableSim.setModel(new SimTableModel());
-            tableSim.repaint();
-            tableSim.revalidate();
-        } catch (SQLException e) {
-            throw e;
+            tblSim.setModel(new SimTableModel());
+            tblSim.repaint();
+            tblSim.revalidate();
+        } catch (SQLException ex) {
+            throw ex;
         }
     }
 
     private void emptyControl() {
-        textSoThueBao.setText("");
-        textNgayDangKy.setText("");
-        textTaiKhoanChinh.setText("");
-        textTaiKhoanKhuyenMai.setText("");
-        textIDKhachHang.setText("");
-        textCuocGoi.setText("");
-        textGoiCuoc.setText("");
+        txfSoThueBao.setText("");
+        dateChooseNgayDangKy.setDate(null);
+        txfTaiKhoanChinh.setText("");
+        txfTaiKhoanKhuyenMai.setText("");
+        txfIdKhachHang.setText("");
+        txfIdCuocGoi.setText("");
+        txfIdGoiCuoc.setText("");
 
     }
 
@@ -70,22 +75,22 @@ public class SIMGUI extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableSim = new javax.swing.JTable();
+        tblSim = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        textSoThueBao = new javax.swing.JTextField();
-        textNgayDangKy = new javax.swing.JTextField();
-        textTaiKhoanChinh = new javax.swing.JTextField();
+        txfSoThueBao = new javax.swing.JTextField();
+        txfTaiKhoanChinh = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        textTaiKhoanKhuyenMai = new javax.swing.JTextField();
+        txfTaiKhoanKhuyenMai = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        textIDKhachHang = new javax.swing.JTextField();
-        textCuocGoi = new javax.swing.JTextField();
-        textGoiCuoc = new javax.swing.JTextField();
+        txfIdKhachHang = new javax.swing.JTextField();
+        txfIdCuocGoi = new javax.swing.JTextField();
+        txfIdGoiCuoc = new javax.swing.JTextField();
+        dateChooseNgayDangKy = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         btnClear = new javax.swing.JButton();
@@ -103,7 +108,7 @@ public class SIMGUI extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        tableSim.setModel(new javax.swing.table.DefaultTableModel(
+        tblSim.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -114,7 +119,12 @@ public class SIMGUI extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tableSim);
+        tblSim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSimMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblSim);
 
         jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -122,90 +132,107 @@ public class SIMGUI extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setText("So thue bao: ");
+        jLabel1.setText("Số thuê bao");
 
-        jLabel2.setText("Ngay dang ky:");
+        jLabel2.setText("Ngày đăng ký");
 
-        jLabel3.setText("Tai khoan chinh: ");
+        jLabel3.setText("Tài khoản chính");
 
-        jLabel4.setText("Tai khoan khuyen mai: ");
+        jLabel4.setText("Tài khoản khuyến mãi");
 
-        jLabel5.setText("ID khach hang: ");
+        jLabel5.setText("ID khách hàng");
 
-        jLabel6.setText("Cuoc goi: ");
+        jLabel6.setText("ID Cuộc gọi ");
 
-        jLabel7.setText("Goi cuoc: ");
+        jLabel7.setText("ID gói cước");
 
-        textIDKhachHang.addActionListener(new java.awt.event.ActionListener() {
+        txfIdKhachHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIDKhachHangActionPerformed(evt);
+                txfIdKhachHangActionPerformed(evt);
             }
         });
+
+        dateChooseNgayDangKy.setDateFormatString("MM/dd/yyyy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textNgayDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textSoThueBao, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textTaiKhoanChinh, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txfSoThueBao, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(txfTaiKhoanChinh, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(dateChooseNgayDangKy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(31, 31, 31)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addGap(46, 46, 46)
+                                .addGap(1, 1, 1)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textGoiCuoc)
-                                    .addComponent(textCuocGoi)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(textIDKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(120, 120, 120))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6))
+                                .addGap(45, 45, 45)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txfIdKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                                    .addComponent(txfIdCuocGoi)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(textTaiKhoanKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(txfTaiKhoanKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txfIdGoiCuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(120, 261, Short.MAX_VALUE))
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txfIdCuocGoi, txfIdGoiCuoc, txfIdKhachHang});
+
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(textSoThueBao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(textIDKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(textNgayDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(textCuocGoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(textTaiKhoanChinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(textGoiCuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txfSoThueBao)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dateChooseNgayDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txfTaiKhoanChinh)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txfIdKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfIdCuocGoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txfTaiKhoanKhuyenMai)
                     .addComponent(jLabel4)
-                    .addComponent(textTaiKhoanKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txfIdGoiCuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(14, 14, 14))
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txfIdCuocGoi, txfIdGoiCuoc, txfIdKhachHang});
 
         jPanel7.add(jPanel2, java.awt.BorderLayout.SOUTH);
 
@@ -253,9 +280,9 @@ public class SIMGUI extends javax.swing.JPanel {
         add(jPanel3, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textIDKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIDKhachHangActionPerformed
+    private void txfIdKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfIdKhachHangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textIDKhachHangActionPerformed
+    }//GEN-LAST:event_txfIdKhachHangActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         emptyControl();
@@ -266,23 +293,28 @@ public class SIMGUI extends javax.swing.JPanel {
         try {
 
             simDAO = new SimDAOImpl();
-            String soThueBao = textSoThueBao.getText();
+            String soThueBao = txfSoThueBao.getText();
 
-//            Date date1 = new Date();
-//	    sim.setNgayDangKy(new Timestamp(date1.getTime()));
-            Integer ngayDangKy = Integer.valueOf(textNgayDangKy.getText());
-            Integer taiKhoanChinh = Integer.valueOf(textTaiKhoanChinh.getText());
-            Integer taiKhoanKhuyenMai = Integer.valueOf(textTaiKhoanKhuyenMai.getText());
-            Integer khachHangID = Integer.valueOf(textIDKhachHang.getText());
-            Integer goiCuocID = Integer.valueOf(textGoiCuoc.getText());
-            Integer cuocGoiID = Integer.valueOf(textCuocGoi.getText());
+            java.util.Date date = dateChooseNgayDangKy.getDate();
+            java.sql.Date ngayDangKy;
+            if (date == null) {
+                ngayDangKy = null;
+            } else {
+                ngayDangKy = new java.sql.Date(date.getTime());
+            }
+
+            Integer taiKhoanChinh = Integer.valueOf(txfTaiKhoanChinh.getText());
+            Integer taiKhoanKhuyenMai = Integer.valueOf(txfTaiKhoanKhuyenMai.getText());
+            Integer khachHangID = Integer.valueOf(txfIdKhachHang.getText());
+            Integer goiCuocID = Integer.valueOf(txfIdGoiCuoc.getText());
+            Integer cuocGoiID = Integer.valueOf(txfIdCuocGoi.getText());
 
             Sim sim = new Sim();
             sim.setSoThueBao(soThueBao);
-//            sim.setNgayDangKy(ngayDangKy);
+            sim.setNgayDangKy(ngayDangKy);
             sim.setTaiKhoanChinh(taiKhoanChinh);
             sim.setTaiKhoanKhuyenMai(taiKhoanKhuyenMai);
-            sim.setKhachHangID(ngayDangKy);
+            sim.setKhachHangID(khachHangID);
             sim.setGoiCuocID(goiCuocID);
             sim.setCuocGoiID(cuocGoiID);
 
@@ -294,7 +326,7 @@ public class SIMGUI extends javax.swing.JPanel {
             emptyControl();
 
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập số nguyên dương vào cước gọi và cước nhắn tin!");
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập số nguyên dương vào cuộc gọi, khách hàng ID và cước nhắn tin...!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
@@ -310,13 +342,13 @@ public class SIMGUI extends javax.swing.JPanel {
 
                 Sim sim = new Sim();
                 sim.setId(id);
-                sim.setSoThueBao(textSoThueBao.getText());
+                sim.setSoThueBao(txfSoThueBao.getText());
 //                sim.setNgayDangKy(Integer.valueOf(textNgayDangKy.getText()));
-                sim.setTaiKhoanChinh(Integer.valueOf(textTaiKhoanChinh.getText()));
-                sim.setTaiKhoanKhuyenMai(Integer.valueOf(textTaiKhoanKhuyenMai.getText()));
-                sim.setKhachHangID(Integer.valueOf(textIDKhachHang.getText()));
-                sim.setGoiCuocID(Integer.valueOf(textGoiCuoc.getText()));
-                sim.setCuocGoiID(Integer.valueOf(textCuocGoi.getText()));
+                sim.setTaiKhoanChinh(Integer.valueOf(txfTaiKhoanChinh.getText()));
+                sim.setTaiKhoanKhuyenMai(Integer.valueOf(txfTaiKhoanKhuyenMai.getText()));
+                sim.setKhachHangID(Integer.valueOf(txfIdKhachHang.getText()));
+                sim.setGoiCuocID(Integer.valueOf(txfIdGoiCuoc.getText()));
+                sim.setCuocGoiID(Integer.valueOf(txfIdCuocGoi.getText()));
 
                 simDAO.updateSim(sim);
                 JOptionPane.showMessageDialog(null, "Đã update thành công!");
@@ -349,12 +381,38 @@ public class SIMGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void tblSimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSimMouseClicked
+        Integer row = tblSim.getSelectedRow();
+        setId((Integer) tblSim.getModel().getValueAt(row, 0));
+        String soThueBao = (String) tblSim.getModel().getValueAt(row, 1);
+
+        java.util.Date ngayDangKy = new java.util.Date();
+        ngayDangKy = (java.util.Date) tblSim.getModel().getValueAt(row, 2);
+
+        Integer taiKhoanChinh = (Integer) tblSim.getModel().getValueAt(row, 3);
+        Integer taiKhoanKhuyenMai = (Integer) tblSim.getModel().getValueAt(row, 4);
+        
+        Integer khachHangID = (Integer) tblSim.getModel().getValueAt(row, 5);
+        Integer goiCuocId = (Integer) tblSim.getModel().getValueAt(row, 6);
+        Integer cuocGoiId = (Integer) tblSim.getModel().getValueAt(row, 7);
+        
+        txfSoThueBao.setText(soThueBao);
+        dateChooseNgayDangKy.setDate(ngayDangKy);
+        txfTaiKhoanChinh.setText(taiKhoanChinh.toString());
+        txfTaiKhoanKhuyenMai.setText(taiKhoanKhuyenMai.toString());
+        txfIdKhachHang.setText(khachHangID.toString());
+        txfIdCuocGoi.setText(cuocGoiId.toString());
+        txfIdGoiCuoc.setText(goiCuocId.toString());
+
+    }//GEN-LAST:event_tblSimMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnUpdate;
+    private com.toedter.calendar.JDateChooser dateChooseNgayDangKy;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -369,13 +427,12 @@ public class SIMGUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableSim;
-    private javax.swing.JTextField textCuocGoi;
-    private javax.swing.JTextField textGoiCuoc;
-    private javax.swing.JTextField textIDKhachHang;
-    private javax.swing.JTextField textNgayDangKy;
-    private javax.swing.JTextField textSoThueBao;
-    private javax.swing.JTextField textTaiKhoanChinh;
-    private javax.swing.JTextField textTaiKhoanKhuyenMai;
+    private javax.swing.JTable tblSim;
+    private javax.swing.JTextField txfIdCuocGoi;
+    private javax.swing.JTextField txfIdGoiCuoc;
+    private javax.swing.JTextField txfIdKhachHang;
+    private javax.swing.JTextField txfSoThueBao;
+    private javax.swing.JTextField txfTaiKhoanChinh;
+    private javax.swing.JTextField txfTaiKhoanKhuyenMai;
     // End of variables declaration//GEN-END:variables
 }

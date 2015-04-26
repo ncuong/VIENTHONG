@@ -6,7 +6,7 @@
 
 package vn.learning.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  *
@@ -15,12 +15,52 @@ import java.sql.Timestamp;
 public class Sim {
     private Integer id;
     private String soThueBao;
-    private Timestamp ngayDangKy;
+    private Date ngayDangKy;
     private Integer taiKhoanChinh;
     private Integer taiKhoanKhuyenMai;
     private Integer khachHangID;
     private Integer cuocGoiID;
     private Integer goiCuocID;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getSoThueBao() {
+        return soThueBao;
+    }
+
+    public void setSoThueBao(String soThueBao) {
+        this.soThueBao = soThueBao;
+    }
+
+    public Date getNgayDangKy() {
+        return ngayDangKy;
+    }
+
+    public void setNgayDangKy(Date ngayDangKy) {
+        this.ngayDangKy = ngayDangKy;
+    }
+
+    public Integer getTaiKhoanChinh() {
+        return taiKhoanChinh;
+    }
+
+    public void setTaiKhoanChinh(Integer taiKhoanChinh) {
+        this.taiKhoanChinh = taiKhoanChinh;
+    }
+
+    public Integer getTaiKhoanKhuyenMai() {
+        return taiKhoanKhuyenMai;
+    }
+
+    public void setTaiKhoanKhuyenMai(Integer taiKhoanKhuyenMai) {
+        this.taiKhoanKhuyenMai = taiKhoanKhuyenMai;
+    }
 
     public Integer getKhachHangID() {
         return khachHangID;
@@ -46,45 +86,6 @@ public class Sim {
         this.goiCuocID = goiCuocID;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getSoThueBao() {
-        return soThueBao;
-    }
-
-    public void setSoThueBao(String soThueBao) {
-        this.soThueBao = soThueBao;
-    }
-
-    public Timestamp getNgayDangKy() {
-        return ngayDangKy;
-    }
-
-    public void setNgayDangKy(Timestamp ngayDangKy) {
-        this.ngayDangKy = ngayDangKy;
-    }
-
-    public Integer getTaiKhoanChinh() {
-        return taiKhoanChinh;
-    }
-
-    public void setTaiKhoanChinh(Integer taiKhoanChinh) {
-        this.taiKhoanChinh = taiKhoanChinh;
-    }
-
-    public Integer getTaiKhoanKhuyenMai() {
-        return taiKhoanKhuyenMai;
-    }
-
-    public void setTaiKhoanKhuyenMai(Integer taiKhoanKhuyenMai) {
-        this.taiKhoanKhuyenMai = taiKhoanKhuyenMai;
-    }
     
     
 }

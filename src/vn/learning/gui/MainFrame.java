@@ -37,7 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSIM = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        menuSim = new javax.swing.JMenuItem();
         menuCuocGoi = new javax.swing.JMenuItem();
         menuGoiCuoc = new javax.swing.JMenuItem();
         menuTheNop = new javax.swing.JMenuItem();
@@ -63,13 +63,13 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jMenu1.add(menuSIM);
 
-        jMenuItem6.setText("SIM");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        menuSim.setText("SIM");
+        menuSim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                menuSimActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem6);
+        jMenu1.add(menuSim);
 
         menuCuocGoi.setText("Cuộc gọi");
         menuCuocGoi.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +168,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuSIMActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void menuSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSimActionPerformed
 
         mainPanel.removeAll();
         mainPanel.repaint();
@@ -181,7 +181,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_menuSimActionPerformed
 
     private void menuCuocGoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCuocGoiActionPerformed
         mainPanel.removeAll();
@@ -248,12 +248,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuItem menuAbout;
     private javax.swing.JMenuItem menuCuocGoi;
     private javax.swing.JMenuItem menuGoiCuoc;
     private javax.swing.JMenuItem menuSIM;
+    private javax.swing.JMenuItem menuSim;
     private javax.swing.JMenuItem menuTheNop;
     // End of variables declaration//GEN-END:variables
 }

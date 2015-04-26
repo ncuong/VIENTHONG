@@ -22,7 +22,7 @@ public class TheNopTienDAOImpl implements TheNopTienDAO {
 
     @Override
     public ArrayList<TheNopTien> getAllTheNop() throws SQLException {
-        ArrayList<TheNopTien> theNopTiens = new ArrayList<>();
+        ArrayList<TheNopTien> theNopTiens = new ArrayList<TheNopTien>();
         String sql = new StringBuilder().append("SELECT * FROM THE_NOP_TIEN").toString();
         
         try {

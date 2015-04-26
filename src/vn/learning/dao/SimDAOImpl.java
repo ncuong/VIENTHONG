@@ -8,7 +8,7 @@ package vn.learning.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import vn.learning.model.Sim;
 import vn.learning.util.DataBaseUtil;
 
@@ -23,8 +23,8 @@ public class SimDAOImpl implements SimDAO {
 
     @Override
     public ArrayList<Sim> getAllSim() throws SQLException {
-        ArrayList<Sim> sims = new ArrayList<>();
-        String sql = new StringBuilder().append("SELECT * FROM SIM").toString();//have to change this line
+        ArrayList<Sim> sims = new ArrayList<Sim>();
+        String sql = new StringBuilder().append("SELECT * FROM SIM").toString();
         try {
             dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
@@ -39,17 +39,25 @@ public class SimDAOImpl implements SimDAO {
                 Integer taiKhoanKhuyenMai = resultSet.getInt("TAI_KHOAN_KHUYEN_MAI");
                 
                 Integer khachHangID = resultSet.getInt("KHACH_HANG_ID");
-                Integer goiCuocID = resultSet.getInt("GOC_CUOC");
-                Integer cuocGoiID = resultSet.getInt(("CUOC_GOI"));
-                
-                
-                
+                Integer goiCuocID = resultSet.getInt("GOI_CUOC_ID");
+                Integer cuocGoiID = resultSet.getInt(("CUOC_GOI_ID"));
                 
                 sim.setId(id);
+                sim.setSoThueBao(soThueBao);
+                sim.setNgayDangKy(ngayDangKy);
+                sim.setTaiKhoanChinh(taiKhoanChinh);
+                sim.setTaiKhoanKhuyenMai(taiKhoanKhuyenMai);
+                sim.setKhachHangID(khachHangID);
+                sim.setCuocGoiID(cuocGoiID);
+                sim.setGoiCuocID(goiCuocID);
+                
+                sims.add(sim);
                 
             }
         } catch (SQLException ex) {
             throw ex;
+        } finally {
+            dataBaseUtil.closeConnection();
         }
         return sims;
     }
@@ -57,7 +65,7 @@ public class SimDAOImpl implements SimDAO {
     @Override
     public void addSim(Sim sim) throws SQLException {
         String sql = new StringBuilder()
-                .append("INSERT INTO SIM VALUES(?,?,?,?,?,?,?)")
+                .append("INSERT INTO SIM(SO_THUE_BAO,NGAY_DANG_KY,TAI_KHOAN_CHINH,TAI_KHOAN_KHUYEN_MAI,KHACH_HANG_ID,GOI_CUOC_ID,CUOC_GOI_ID) VALUES(?,?,?,?,?,?,?)")
                 .toString();
         try {
             dataBaseUtil = new DataBaseUtil();
