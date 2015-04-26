@@ -3,18 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vn.learning.gui;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import vn.learning.dao.CuocGoiDAO;
 import vn.learning.dao.CuocGoiDAOImpl;
-import vn.learning.dao.TheNopTienDAO;
-import vn.learning.dao.TheNopTienDAOImpl;
 import vn.learning.model.CuocGoi;
-import vn.learning.model.TheNopTien;
 
 /**
  *
@@ -25,14 +20,22 @@ public class CuocGoiGUI extends javax.swing.JPanel {
     /**
      * Creates new form CuocGoiGUI
      */
-     private CuocGoiDAO cuocGoiDAO;
+    private CuocGoiDAO cuocGoiDAO;
     private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     private void fillDataToTable() throws SQLException {
         try {
-            tableCuocGoi.setModel(new CuocGoiTableModel());
-            tableCuocGoi.repaint();
-            tableCuocGoi.revalidate();
+            tblCuocGoi.setModel(new CuocGoiTableModel());
+            tblCuocGoi.repaint();
+            tblCuocGoi.revalidate();
         } catch (SQLException ex) {
             throw ex;
         }
@@ -40,8 +43,8 @@ public class CuocGoiGUI extends javax.swing.JPanel {
 
     private void emptyControl() {
         textThueBao.setText("");
-        dateStart.setDate(null);
-        dateEnd.setDate(null);
+        dateChooseThoiGianBatDau.setDate(null);
+        dateChooseThoiGianKetThuc.setDate(null);
     }
 
     public CuocGoiGUI() throws SQLException {
@@ -69,13 +72,13 @@ public class CuocGoiGUI extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblThoiGianKetThuc = new javax.swing.JLabel();
         textThueBao = new javax.swing.JTextField();
-        dateStart = new com.toedter.calendar.JDateChooser();
-        dateEnd = new com.toedter.calendar.JDateChooser();
+        dateChooseThoiGianBatDau = new com.toedter.calendar.JDateChooser();
+        dateChooseThoiGianKetThuc = new com.toedter.calendar.JDateChooser();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableCuocGoi = new javax.swing.JTable();
+        tblCuocGoi = new javax.swing.JTable();
 
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -126,15 +129,15 @@ public class CuocGoiGUI extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setText("Thue bao duoc goi: ");
+        jLabel1.setText("Thuê bao được gọi:");
 
-        jLabel2.setText("Thoi gian bat dau: ");
+        jLabel2.setText("Thời gian bắt đầu:");
 
-        jLabel3.setText("Thoi gian ket thuc: ");
+        lblThoiGianKetThuc.setText("Thời gian kết thúc:");
 
-        dateStart.setDateFormatString("MM/dd/ yyyy");
+        dateChooseThoiGianBatDau.setDateFormatString("MM/dd/ yyyy");
 
-        dateEnd.setDateFormatString("MM/dd/ yyyy");
+        dateChooseThoiGianKetThuc.setDateFormatString("MM/dd/ yyyy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -146,13 +149,13 @@ public class CuocGoiGUI extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel2)
                         .addComponent(jLabel1))
-                    .addComponent(jLabel3))
+                    .addComponent(lblThoiGianKetThuc))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateChooseThoiGianKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textThueBao, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateStart, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(351, Short.MAX_VALUE))
+                    .addComponent(dateChooseThoiGianBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,11 +167,11 @@ public class CuocGoiGUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(dateStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(dateChooseThoiGianBatDau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(dateEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblThoiGianKetThuc)
+                    .addComponent(dateChooseThoiGianKetThuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(19, 19, 19))
         );
 
@@ -176,7 +179,7 @@ public class CuocGoiGUI extends javax.swing.JPanel {
 
         jPanel6.setLayout(new java.awt.BorderLayout());
 
-        tableCuocGoi.setModel(new javax.swing.table.DefaultTableModel(
+        tblCuocGoi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -187,7 +190,12 @@ public class CuocGoiGUI extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tableCuocGoi);
+        tblCuocGoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCuocGoiMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblCuocGoi);
 
         jPanel6.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -202,29 +210,27 @@ public class CuocGoiGUI extends javax.swing.JPanel {
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
 
-       try {
-            java.util.Date date1 = dateStart.getDate();
-            java.util.Date date2= dateEnd.getDate();
-            
+        try {
+            java.util.Date date1 = dateChooseThoiGianBatDau.getDate();
+            java.util.Date date2 = dateChooseThoiGianKetThuc.getDate();
+
             java.sql.Date thoiGianBatDau;
             if (date1 == null) {
                 thoiGianBatDau = null;
             } else {
                 thoiGianBatDau = new java.sql.Date(date1.getTime());
             }
-             java.sql.Date thoiGianKetThuc;
-             if (date2 == null) {
+            java.sql.Date thoiGianKetThuc;
+            if (date2 == null) {
                 thoiGianKetThuc = null;
             } else {
                 thoiGianKetThuc = new java.sql.Date(date2.getTime());
             }
 
-
             CuocGoi cuocGoi = new CuocGoi();
             cuocGoi.setThueBaoDuocGoi(textThueBao.getText());
             cuocGoi.setThoiGianBatDau(thoiGianBatDau);
             cuocGoi.setThoiGianKetThuc(thoiGianKetThuc);
-            
 
             cuocGoiDAO = new CuocGoiDAOImpl();
             cuocGoiDAO.addCuocGoi(cuocGoi);
@@ -243,7 +249,6 @@ public class CuocGoiGUI extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try {
-            cuocGoiDAO = new CuocGoiDAOImpl();
             if (id <= 0) {
                 JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện thay đổi");
             } else {
@@ -251,26 +256,25 @@ public class CuocGoiGUI extends javax.swing.JPanel {
 
                 CuocGoi cuocGoi = new CuocGoi();
                 cuocGoi.setId(id);
-                
-                 java.util.Date date1 = dateStart.getDate();
-                 java.util.Date date2= dateEnd.getDate();
-            
+
+                java.util.Date date1 = dateChooseThoiGianBatDau.getDate();
+                java.util.Date date2 = dateChooseThoiGianKetThuc.getDate();
+
                 java.sql.Date thoiGianBatDau;
                 if (date1 == null) {
-                thoiGianBatDau = null;
+                    thoiGianBatDau = null;
                 } else {
-                thoiGianBatDau = new java.sql.Date(date1.getTime());
-                   }
-             java.sql.Date thoiGianKetThuc;
+                    thoiGianBatDau = new java.sql.Date(date1.getTime());
+                }
+                java.sql.Date thoiGianKetThuc;
                 if (date2 == null) {
-                thoiGianKetThuc = null;
+                    thoiGianKetThuc = null;
                 } else {
-                thoiGianKetThuc = new java.sql.Date(date2.getTime());
-                 }
+                    thoiGianKetThuc = new java.sql.Date(date2.getTime());
+                }
                 cuocGoi.setThueBaoDuocGoi(textThueBao.getText());
                 cuocGoi.setThoiGianBatDau(thoiGianBatDau);
                 cuocGoi.setThoiGianKetThuc(thoiGianKetThuc);
-               
 
                 cuocGoiDAO.updateCuocGoi(cuocGoi);
                 JOptionPane.showMessageDialog(null, "Đã update thành công!");
@@ -280,14 +284,14 @@ public class CuocGoiGUI extends javax.swing.JPanel {
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập số nguyên dương vào cước gọi và cước nhắn tin!");
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
-        try{
+        try {
             cuocGoiDAO = new CuocGoiDAOImpl();
             if (id <= 0) {
                 JOptionPane.showMessageDialog(null, "Vui lòng chọn một hàng để thực hiện delete!");
@@ -298,10 +302,26 @@ public class CuocGoiGUI extends javax.swing.JPanel {
                 fillDataToTable();
                 emptyControl();
             }
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không kết nối được database, vui lòng liên hệ nhà cung cấp dịch vụ để được giải quyết!");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void tblCuocGoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCuocGoiMouseClicked
+        Integer row = tblCuocGoi.getSelectedRow();
+        setId((Integer) tblCuocGoi.getValueAt(row, 0));
+        
+        String thueBaoDuocGoi = (String) tblCuocGoi.getValueAt(row, 1);
+        textThueBao.setText(thueBaoDuocGoi);
+        java.util.Date thoiGianBatDau = new java.util.Date();
+        thoiGianBatDau = (java.util.Date) tblCuocGoi.getModel().getValueAt(row, 2);
+        dateChooseThoiGianBatDau.setDate(thoiGianBatDau);
+        java.util.Date thoiGianKetThuc = new java.util.Date();
+        thoiGianKetThuc = (java.util.Date) tblCuocGoi.getModel().getValueAt(row, 3);
+        dateChooseThoiGianKetThuc.setDate(thoiGianKetThuc);
+        
+        
+    }//GEN-LAST:event_tblCuocGoiMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -309,11 +329,10 @@ public class CuocGoiGUI extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnUpdate;
-    private com.toedter.calendar.JDateChooser dateEnd;
-    private com.toedter.calendar.JDateChooser dateStart;
+    private com.toedter.calendar.JDateChooser dateChooseThoiGianBatDau;
+    private com.toedter.calendar.JDateChooser dateChooseThoiGianKetThuc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -321,7 +340,8 @@ public class CuocGoiGUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableCuocGoi;
+    private javax.swing.JLabel lblThoiGianKetThuc;
+    private javax.swing.JTable tblCuocGoi;
     private javax.swing.JTextField textThueBao;
     // End of variables declaration//GEN-END:variables
 }

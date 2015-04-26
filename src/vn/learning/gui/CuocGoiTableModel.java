@@ -11,10 +11,7 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import vn.learning.dao.CuocGoiDAO;
 import vn.learning.dao.CuocGoiDAOImpl;
-import vn.learning.dao.KhachHangDAO;
-import vn.learning.dao.KhachHangDAOImpl;
 import vn.learning.model.CuocGoi;
-import vn.learning.model.KhachHang;
 
 /**
  *

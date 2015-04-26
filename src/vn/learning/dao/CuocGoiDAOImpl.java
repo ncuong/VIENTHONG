@@ -8,7 +8,7 @@ package vn.learning.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import vn.learning.model.CuocGoi;
 import vn.learning.util.DataBaseUtil;
 
@@ -38,6 +38,11 @@ public class CuocGoiDAOImpl implements CuocGoiDAO {
                 
                 cuocGoi.setId(id);
                 cuocGoi.setThueBaoDuocGoi(thueBaoDuocGoi);
+                cuocGoi.setThoiGianBatDau(thoiGianBatDau);
+                cuocGoi.setThoiGianKetThuc(thoiGianKetThuc);
+                
+                cuocGois.add(cuocGoi);
+                
                 
             }
         } catch (SQLException ex) {
@@ -49,7 +54,7 @@ public class CuocGoiDAOImpl implements CuocGoiDAO {
     @Override
     public void addCuocGoi(CuocGoi cuocGoi) throws SQLException {
          String sql = new StringBuilder()
-                .append("INSERT INTO CUOC_GOI VALUES(?,?,?)")
+                .append("INSERT INTO CUOC_GOI(THUE_BAO_DUOC_GOI,THOI_GIAN_BAT_DAU,THOI_GIAN_KET_THUC) VALUES(?,?,?)")
                 .toString();
         try {
             dataBaseUtil = new DataBaseUtil();
@@ -66,13 +71,13 @@ public class CuocGoiDAOImpl implements CuocGoiDAO {
     public void updateCuocGoi(CuocGoi cuocGoi) throws SQLException {
          String sql = new StringBuilder()
                 .append("UPDATE CUOC_GOI ")
-                .append("THUE_BAO_DUOC_GOI = ?, THOI_GIAN_BAT_DAU = ?, THOI_GIAN_KET_THUC = ? ")
+                .append("SET THUE_BAO_DUOC_GOI = ?, THOI_GIAN_BAT_DAU = ?, THOI_GIAN_KET_THUC = ? ")
                 .append("WHERE ID = ?")
                 .toString();
         try {
             dataBaseUtil = new DataBaseUtil();
             dataBaseUtil.createConnection();
-            dataBaseUtil.executeUpdate(sql, new Object[]{cuocGoi.getThueBaoDuocGoi(), cuocGoi.getThoiGianBatDau(), cuocGoi.getThoiGianKetThuc()});
+            dataBaseUtil.executeUpdate(sql, new Object[]{cuocGoi.getThueBaoDuocGoi(), cuocGoi.getThoiGianBatDau(), cuocGoi.getThoiGianKetThuc(), cuocGoi.getId()});
         } catch (SQLException ex) {
             throw ex;
         } finally {

@@ -19,6 +19,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,88,0,0,3,32"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -128,15 +129,15 @@
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblThoiGianKetThuc" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="dateEnd" min="-2" pref="142" max="-2" attributes="0"/>
+                          <Component id="dateChooseThoiGianKetThuc" min="-2" pref="142" max="-2" attributes="0"/>
                           <Component id="textThueBao" min="-2" pref="142" max="-2" attributes="0"/>
-                          <Component id="dateStart" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                          <Component id="dateChooseThoiGianBatDau" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="351" max="32767" attributes="0"/>
+                      <EmptySpace pref="353" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -151,12 +152,12 @@
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="dateStart" max="32767" attributes="0"/>
+                          <Component id="dateChooseThoiGianBatDau" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <Component id="dateEnd" max="32767" attributes="0"/>
+                          <Component id="lblThoiGianKetThuc" min="-2" max="-2" attributes="0"/>
+                          <Component id="dateChooseThoiGianKetThuc" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
@@ -166,27 +167,27 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Thue bao duoc goi: "/>
+                <Property name="text" type="java.lang.String" value="Thu&#xea; bao &#x111;&#x1b0;&#x1ee3;c g&#x1ecd;i:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Thoi gian bat dau: "/>
+                <Property name="text" type="java.lang.String" value="Th&#x1edd;i gian b&#x1eaf;t &#x111;&#x1ea7;u:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
+            <Component class="javax.swing.JLabel" name="lblThoiGianKetThuc">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Thoi gian ket thuc: "/>
+                <Property name="text" type="java.lang.String" value="Th&#x1edd;i gian k&#x1ebf;t th&#xfa;c:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="textThueBao">
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="dateStart">
+            <Component class="com.toedter.calendar.JDateChooser" name="dateChooseThoiGianBatDau">
               <Properties>
                 <Property name="dateFormatString" type="java.lang.String" value="MM/dd/ yyyy"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="dateEnd">
+            <Component class="com.toedter.calendar.JDateChooser" name="dateChooseThoiGianKetThuc">
               <Properties>
                 <Property name="dateFormatString" type="java.lang.String" value="MM/dd/ yyyy"/>
               </Properties>
@@ -214,7 +215,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tableCuocGoi">
+                <Component class="javax.swing.JTable" name="tblCuocGoi">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="4">
@@ -225,6 +226,9 @@
                       </Table>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblCuocGoiMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
